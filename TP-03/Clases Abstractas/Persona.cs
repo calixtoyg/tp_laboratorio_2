@@ -21,7 +21,7 @@ namespace TP_03
         {
             this.nombre = nombre;
             this.apellido = apellido;
-            this.nacionalidad = nacionalidad;
+            Nacionalidad = nacionalidad;
         }
 
         protected Persona(string nombre, string apellido, int dni, ENacionalidad nacionalidad) : this(nombre, apellido, nacionalidad)
@@ -59,7 +59,20 @@ namespace TP_03
         public ENacionalidad Nacionalidad
         {
             get => nacionalidad;
-            set => nacionalidad = value;
+            set
+            {
+                switch (value)
+                {
+                    case ENacionalidad.Argentino:
+                    case ENacionalidad.Extranjero:
+                        nacionalidad = value;
+                        break;
+                    default:
+                        throw new NacionalidadInvalidaException($"Nacionalidad {value} invalida.");
+                        
+                }
+
+            }
         }
 
         public int Dni
@@ -98,6 +111,8 @@ namespace TP_03
                         return datoInteger;
                     case ENacionalidad.Extranjero when datoInteger >= 90000000 && datoInteger <= 99999999:
                         return datoInteger;
+                    default:
+                        return 0;
                 }
             }
             throw new DniInvalidoException(string.Format("Dni {0} no es valido.", dato));
@@ -123,11 +138,12 @@ namespace TP_03
             StringBuilder toString = new StringBuilder();
             return toString.AppendFormat("Nombre: {0} Apellido: {1} DNI: {2} Nacionalidad: {3} \n", Nombre, Apellido, Dni, Nacionalidad).ToString();
         }
+        public enum ENacionalidad
+        {
+            Argentino,Extranjero
+        }
 
     
     }
-    public enum ENacionalidad
-    {
-        Argentino,Extranjero
-    }
+    
 }

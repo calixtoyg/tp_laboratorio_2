@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Clases_Instanciables;
-using TP_03;
 
 namespace TP_03
 {
     public sealed class Profesor : Universitario
     {
-        private Queue<EClase> claseDelDia;
+        private Queue<Universidad.EClases> claseDelDia;
         private static Random random;
 
         private Profesor()
@@ -23,6 +22,8 @@ namespace TP_03
         public Profesor(int id, string nombre, string apellido, string dni, ENacionalidad nacionalidad) :
             base(id, nombre, apellido, dni, nacionalidad)
         {
+           claseDelDia = new Queue<Universidad.EClases>();
+           _randomClases();
         }
 
         protected override string ParticiparEnClase()
@@ -37,7 +38,7 @@ namespace TP_03
             if (!ReferenceEquals(claseDelDia, null))
             {
                 
-                foreach (EClase clase in claseDelDia)
+                foreach (Universidad.EClases clase in claseDelDia)
                 {
 
                     builder.Append($"{clase.ToString()}, ");
@@ -50,20 +51,20 @@ namespace TP_03
 
         void _randomClases()
         {    
-            Array valores = Enum.GetValues(typeof(EClase));
+            Array valores = Enum.GetValues(typeof(Universidad.EClases));
             random = new Random();
-            claseDelDia.Enqueue((EClase)valores.GetValue(random.Next(valores.Length)));
-            claseDelDia.Enqueue((EClase)valores.GetValue(random.Next(valores.Length)));
+            claseDelDia.Enqueue((Universidad.EClases)valores.GetValue(random.Next(valores.Length)));
+            claseDelDia.Enqueue((Universidad.EClases)valores.GetValue(random.Next(valores.Length)));
         }
 
-        public static bool operator ==(Profesor profesor, EClase clase)
+        public static bool operator ==(Profesor profesor, Universidad.EClases clases)
         {
-            return !ReferenceEquals(profesor,null) && profesor.claseDelDia.Contains(clase);
+            return !ReferenceEquals(profesor,null) && profesor.claseDelDia.Contains(clases);
         }
 
-        public static bool operator !=(Profesor profesor, EClase clase)
+        public static bool operator !=(Profesor profesor, Universidad.EClases clases)
         {
-            return !(profesor == clase);
+            return !(profesor == clases);
         }
 
         public override string ToString()

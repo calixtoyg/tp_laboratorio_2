@@ -1,13 +1,15 @@
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Remoting.Messaging;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using Excepciones;
 using TP_03;
 
 namespace Clases_Instanciables
 {
+    [Serializable]
     public class Universidad
     {
         private List<Alumno> alumnos;
@@ -21,25 +23,27 @@ namespace Clases_Instanciables
             profesores = new List<Profesor>();
         }
 
-        public bool Guardar(Universidad uni)
+        public static bool Guardar(Universidad uni)
         {
             try
             {
-                StreamWriter fichero;
-                fichero = File.CreateText("universidad.txt");
-                fichero.WriteLine(uni.Leer());
-                fichero.Close();
+                XmlTextWriter writer; 
+                XmlSerializer ser;   
+                writer = new XmlTextWriter("Universidad.xml", Encoding.UTF8);
+                ser = new XmlSerializer(typeof(Universidad));
+                ser.Serialize(writer, uni.Leer());
+                writer.Close();
                 return true;
             }
             catch (Exception e)
             {
-                return false;
+               throw new ArchivosException(e);
             }
         }
 
-        private string Leer()
+        private Universidad Leer()
         {
-            return ToString();
+            return this;
         }
 
         public Jornada this[int index]
@@ -86,51 +90,49 @@ namespace Clases_Instanciables
             return !(universidad == profesor);
         }
 
-        public static bool operator +(Universidad universidad, EClase clase)
+        public static Universidad operator +(Universidad universidad, EClases clases)
         {
             List<Alumno> alumnosQuePuedenTomarLaClase = new List<Alumno>();
-            Profesor profesorQuePuedeDarLaClase = universidad == clase;
+            Profesor profesorQuePuedeDarLaClase = universidad == clases;
 
             foreach (Alumno alumno in universidad.alumnos)
             {
-                if (alumno == clase)
+                if (alumno == clases)
                 {
                     alumnosQuePuedenTomarLaClase.Add(alumno);
                 }
             }
-
-            if (ReferenceEquals(profesorQuePuedeDarLaClase, null)) return false;
-            universidad.jornada.Add(new Jornada(clase, profesorQuePuedeDarLaClase));
-            return true;
-            return false;
+            
+            universidad.jornada.Add(new Jornada(clases, profesorQuePuedeDarLaClase));
+            return universidad;
 
         }
 
-        public static bool operator +(Universidad universidad, Alumno alumno)
+        public static Universidad operator +(Universidad universidad, Alumno alumno)
         {
             if (universidad.alumnos.Contains(alumno))
             {
-                return false;
+                throw new AlumnoRepetidoException($"El alumno {alumno.MostrarDatos()} ya esta la universidad.");
             }
             universidad.alumnos.Add(alumno);
-            return true;
+            return universidad;
         }  
         
-        public static bool operator +(Universidad universidad, Profesor profesor)
+        public static Universidad operator +(Universidad universidad, Profesor profesor)
         {
             if (universidad.profesores.Contains(profesor))
             {
-                return false;
+                return universidad;
             }
             universidad.profesores.Add(profesor);
-            return true;
+            return universidad;
         }
 
-        public static Profesor operator ==(Universidad universidad, EClase clase)
+        public static Profesor operator ==(Universidad universidad, EClases clases)
         {
             foreach (Profesor profesor in universidad.profesores)
             {
-                if (profesor == clase)
+                if (profesor == clases)
                 {
                     return profesor;
                 }
@@ -140,11 +142,11 @@ namespace Clases_Instanciables
 
         }
 
-        public static Profesor operator !=(Universidad universidad, EClase clase)
+        public static Profesor operator !=(Universidad universidad, EClases clases)
         {
             foreach (Profesor profesor in universidad.profesores)
             {
-                if (profesor != clase)
+                if (profesor != clases)
                 {
                     return profesor;
                 }
@@ -157,10 +159,13 @@ namespace Clases_Instanciables
         {
             return base.ToString();
         }
+        public enum EClases
+        {
+            Programacion, Laboratorio, Legislacion, SPD
+        }
+       
     }
 
-    public enum EClase
-    {
-        Programacion, Laboratorio, Legislacion, SPD
-    }
+
+ 
 }

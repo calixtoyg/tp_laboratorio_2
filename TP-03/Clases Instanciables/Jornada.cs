@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Excepciones;
 using TP_03;
 
 namespace Clases_Instanciables
@@ -9,7 +10,7 @@ namespace Clases_Instanciables
     public class Jornada
     {
         private List<Alumno> alumnos;
-        private EClase clase;
+        private Universidad.EClases clases;
         private Profesor instructor;
 
         private Jornada()
@@ -17,9 +18,9 @@ namespace Clases_Instanciables
             alumnos = new List<Alumno>();
         }
 
-        public Jornada(EClase clase, Profesor instructor) : this()
+        public Jornada(Universidad.EClases clases, Profesor instructor) : this()
         {
-            this.clase = clase;
+            this.clases = clases;
             this.instructor = instructor;
         }
 
@@ -29,10 +30,10 @@ namespace Clases_Instanciables
             set => alumnos = value;
         }
 
-        public EClase Clase
+        public Universidad.EClases Clases
         {
-            get => clase;
-            set => clase = value;
+            get => clases;
+            set => clases = value;
         }
 
         public Profesor Instructor
@@ -41,7 +42,7 @@ namespace Clases_Instanciables
             set => instructor = value;
         }
 
-        public bool Guardar(Jornada jornada)
+        public static bool Guardar(Jornada jornada)
         {
             try
             {
@@ -53,20 +54,20 @@ namespace Clases_Instanciables
             }
             catch (Exception e)
             {
-                return false;
+                throw new ArchivosException(e);
             }
         }
 
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Jornada Lista de alumnos: ");
+            builder.Append("ALUMNOS: ");
             foreach (Alumno alumno in alumnos)
             {
-                builder.Append($"{alumno.MostrarDatos()}");
+                builder.Append($"{alumno.MostrarDatos()}\n");
             }
 
-            return builder.Append(instructor.MostrarDatos()).Append($"Clase {clase} \n").ToString();
+            return builder.Append(instructor.MostrarDatos()).Append($"Clase {clases} \n").ToString();
         }
 
         public string Leer()

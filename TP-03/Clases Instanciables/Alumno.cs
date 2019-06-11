@@ -5,21 +5,21 @@ namespace Clases_Instanciables
 {
     public sealed class Alumno : Universitario
     {
-        private EClase claseQueToma;
-        private EEstadoDeCuenta estadoCuenta;
+        private Universidad.EClases clasesQueToma;
+        private EEstadoCuenta estadoCuenta;
 
         private Alumno()
         {
         }
 
         public Alumno(int id, string nombre, string apellido, string dni, ENacionalidad nacionalidad,
-            EClase claseQueToma) : base(id, nombre, apellido, dni, nacionalidad)
+            Universidad.EClases clasesQueToma) : base(id, nombre, apellido, dni, nacionalidad)
         {
-            this.claseQueToma = claseQueToma;
+            this.clasesQueToma = clasesQueToma;
         }
 
         public Alumno(int id, string nombre, string apellido, string dni, ENacionalidad nacionalidad,
-            EClase claseQueToma, EEstadoDeCuenta estadoCuenta) : this(id, nombre, apellido, dni, nacionalidad, claseQueToma)
+            Universidad.EClases clasesQueToma, EEstadoCuenta estadoCuenta) : this(id, nombre, apellido, dni, nacionalidad, clasesQueToma)
         {
             this.estadoCuenta = estadoCuenta;
         }
@@ -27,12 +27,12 @@ namespace Clases_Instanciables
 
         protected override string ParticiparEnClase()
         {
-            return string.Format("TOMA CLASES DE {0} \n", claseQueToma);
+            return string.Format("TOMA CLASES DE {0} \n", clasesQueToma);
         }
 
         public override string ToString()
         {
-            return new StringBuilder().AppendFormat("Alumno Estado de cuenta: {0} Clase que toma: {1} \n", estadoCuenta, claseQueToma)
+            return new StringBuilder().AppendFormat("ESTADO DE CUENTA: {0} TOMA CLASES DE: {1} \n", estadoCuenta, clasesQueToma)
                 .ToString();
         }
 
@@ -43,21 +43,23 @@ namespace Clases_Instanciables
             return mostrarDatos.Append(ToString()).ToString();
         }
 
-        public static bool operator ==(Alumno alumno, EClase clase)
+        public static bool operator ==(Alumno alumno, Universidad.EClases clases)
         {
-            return alumno.claseQueToma.Equals(clase) && !alumno.estadoCuenta.Equals(EEstadoDeCuenta.Deudor);
+            return alumno.clasesQueToma.Equals(clases) && !alumno.estadoCuenta.Equals(EEstadoCuenta.Deudor);
         }
 
-        public static bool operator !=(Alumno alumno, EClase clase)
+        public static bool operator !=(Alumno alumno, Universidad.EClases clases)
         {
-            return !alumno.claseQueToma.Equals(clase);
+            return !alumno.clasesQueToma.Equals(clases);
+        }
+        
+        public enum EEstadoCuenta
+        {
+            AlDia,
+            Deudor,
+            Becado
         }
     }
 
-    public enum EEstadoDeCuenta
-    {
-        AlDia,
-        Deudor,
-        Becado
-    }
+  
 }
