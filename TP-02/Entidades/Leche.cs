@@ -11,7 +11,7 @@ namespace Entidades_2018
     public class Leche : Producto
     {
         public enum ETipo { Entera, Descremada }
-        ETipo tipo;
+        private ETipo tipo;
 
         /// <summary>
         /// Por defecto, TIPO será ENTERA
@@ -25,7 +25,7 @@ namespace Entidades_2018
             tipo = ETipo.Entera;
         }
 
-        public Leche(EMarca marca, string patente, ConsoleColor color, ETipo tipo) : this(marca, patente, color)
+        public Leche(EMarca marca, string patente, ConsoleColor color, ETipo tipo) : base(patente, marca, color)
         {
             this.tipo = tipo;
         }
