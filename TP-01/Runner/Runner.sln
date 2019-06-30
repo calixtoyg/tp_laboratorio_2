@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runner", "Runner.csproj", "{D294B576-7781-4B3C-A9AB-BBD738059E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{056B816F-3AB7-4913-A017-106E97ABC212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiCalculadora", "MiCalculadora\MiCalculadora.csproj", "{41654E18-B653-4B7C-87C6-64EEABEDE7FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D294B576-7781-4B3C-A9AB-BBD738059E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D294B576-7781-4B3C-A9AB-BBD738059E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D294B576-7781-4B3C-A9AB-BBD738059E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D294B576-7781-4B3C-A9AB-BBD738059E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{056B816F-3AB7-4913-A017-106E97ABC212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{056B816F-3AB7-4913-A017-106E97ABC212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{056B816F-3AB7-4913-A017-106E97ABC212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{056B816F-3AB7-4913-A017-106E97ABC212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41654E18-B653-4B7C-87C6-64EEABEDE7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41654E18-B653-4B7C-87C6-64EEABEDE7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41654E18-B653-4B7C-87C6-64EEABEDE7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41654E18-B653-4B7C-87C6-64EEABEDE7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
