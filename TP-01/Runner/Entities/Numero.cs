@@ -1,5 +1,4 @@
 using System;
-using System.Data.Common;
 using System.Text;
 
 namespace Entities
@@ -38,7 +37,6 @@ namespace Entities
 
             Console.WriteLine("No se pudo parsear de {0} --> {1}", strNumero, result);
             return result;
-
         }
 
         public string BinarioDecimal(string binario)
@@ -58,16 +56,15 @@ namespace Entities
                 else
                 {
                     int temp = valorAbsolutoSinDecimales % 10;
-                    resultado += temp * (int)Math.Pow(2, contador);
-                    valorAbsolutoSinDecimales = valorAbsolutoSinDecimales/ 10;
+                    resultado += temp * (int) Math.Pow(2, contador);
+                    valorAbsolutoSinDecimales = valorAbsolutoSinDecimales / 10;
                     contador++;
                 }
             }
 
             return resultado.ToString();
-
         }
-        
+
         public string DecimalBinario(string numeroDecimal)
         {
             SetNumero = numeroDecimal;
@@ -75,14 +72,14 @@ namespace Entities
             int valorAbsolutoSinDecimales = (int) valorAbsoluto;
             int[] binaryNum = new int[1000];
             int i = 0;
-            
+
             while (valorAbsolutoSinDecimales > 0)
             {
                 binaryNum[i] = valorAbsolutoSinDecimales % 2;
                 valorAbsolutoSinDecimales /= 2;
                 i++;
             }
-            
+
             StringBuilder builder = new StringBuilder();
 
             for (int j = i; j >= 0; j--)
@@ -91,24 +88,22 @@ namespace Entities
             }
 
             return builder.ToString();
+        }
 
-
-        }    
-        
         public string DecimalBinario(double numeroDecimal)
         {
             double valorAbsoluto = Math.Abs(numeroDecimal);
             int valorAbsolutoSinDecimales = (int) valorAbsoluto;
             int[] binaryNum = new int[1000];
             int i = 0;
-            
+
             while (valorAbsolutoSinDecimales > 0)
             {
                 binaryNum[i] = valorAbsolutoSinDecimales % 2;
                 valorAbsolutoSinDecimales /= 2;
                 i++;
             }
-            
+
             StringBuilder builder = new StringBuilder();
 
             for (int j = i; j >= 0; j--)
@@ -123,6 +118,7 @@ namespace Entities
         {
             return n1.numero + n2.numero;
         }
+
         public static double operator -(Numero n1, Numero n2)
         {
             return n1.numero - n2.numero;
@@ -132,13 +128,14 @@ namespace Entities
         {
             return n1.numero * n2.numero;
         }
-        
+
         public static double operator /(Numero n1, Numero n2)
         {
             if (n2.numero == 0)
             {
                 return Double.MinValue;
             }
+
             return n1.numero / n2.numero;
         }
     }

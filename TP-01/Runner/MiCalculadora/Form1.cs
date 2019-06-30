@@ -1,14 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 
@@ -26,7 +16,6 @@ namespace MiCalculadora
             txtNumero1.Text = String.Empty;
             txtNumero2.Text = String.Empty;
             lblResultado.Text = String.Empty;
-//            this. = "Hola que tal";
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -42,9 +31,7 @@ namespace MiCalculadora
             double valorDeRetorno = Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.SelectedItem.ToString());
             if (valorDeRetorno == Double.MinValue)
             {
-                
-               lblResultado.Text = "No se puede divir por 0";
-
+                lblResultado.Text = "No se puede divir por 0";
             }
             else
             {
@@ -72,7 +59,6 @@ namespace MiCalculadora
             {
                 lblResultado.Text = new Numero(lblResultado.Text).DecimalBinario(lblResultado.Text);
             }
-            
         }
 
         private void btnConvertirADecimal_Click(object sender, EventArgs e)

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Entities
+﻿namespace Entities
 {
     public static class Calculadora
     {
@@ -9,7 +7,6 @@ namespace Entities
             string operadorValidado = ValidarOperador(operador);
             switch (operadorValidado)
             {
-                
                 case "-":
                     return num1 - num2;
                 case "*":
@@ -17,11 +14,10 @@ namespace Entities
                 case "/":
                     double resultado = num1 / num2;
                     return resultado;
-                
+
                 default:
                     return num1 + num2;
             }
-
         }
 
         private static string ValidarOperador(string operador)
