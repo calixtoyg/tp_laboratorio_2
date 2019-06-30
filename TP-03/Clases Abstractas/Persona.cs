@@ -97,7 +97,7 @@ namespace TP_03
                     return dato;
             }
 
-            throw new DniInvalidoException(string.Format("Dni {0} no es valido.", dato));
+            throw new NacionalidadInvalidaException(string.Format("Dni {0} no es valido.", dato));
 
         }      
         
@@ -112,7 +112,8 @@ namespace TP_03
                     case ENacionalidad.Extranjero when datoInteger >= 90000000 && datoInteger <= 99999999:
                         return datoInteger;
                     default:
-                        return 0;
+                        throw new NacionalidadInvalidaException(string.Format("La nacionalidad {0} no coincide con el dni {1}.", nacionalidad, dato));
+
                 }
             }
             throw new DniInvalidoException(string.Format("Dni {0} no es valido.", dato));

@@ -77,7 +77,16 @@ namespace Clases_Instanciables
 
         public static bool operator ==(Jornada jornada, Alumno alumno)
         {
-            return !ReferenceEquals(jornada, null) && jornada.Alumnos.Contains(alumno);
+            if (!ReferenceEquals(jornada, null) && !ReferenceEquals(alumno,null))
+            {
+                if (alumno == jornada.clases)
+                {
+                    return true;
+                }
+                
+            }
+
+            return false;
         }
 
         public static bool operator !=(Jornada jornada, Alumno alumno)

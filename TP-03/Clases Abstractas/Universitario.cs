@@ -26,7 +26,7 @@ namespace TP_03
         
         public static bool operator ==(Universitario u1, Universitario u2)
         {
-            return !ReferenceEquals(u1,null) && !ReferenceEquals(u2, null) && u1.GetType() == u2.GetType() && u1.Dni.Equals(u2.Dni) && u1.legajo.Equals(u2.legajo);
+            return !ReferenceEquals(u1,null) && !ReferenceEquals(u2, null) && u1.GetType() == u2.GetType() && (u1.Dni.Equals(u2.Dni) || u1.legajo.Equals(u2.legajo));
         }
 
         public static bool operator !=(Universitario u1, Universitario u2)

@@ -72,7 +72,20 @@ namespace Clases_Instanciables
 
         public static bool operator ==(Universidad universidad, Alumno alumno)
         {
-            return !ReferenceEquals(universidad, null) && universidad.alumnos.Contains(alumno);
+            if (ReferenceEquals(universidad,null))
+            {
+                return false;
+            }
+
+            foreach (Alumno alu in universidad.alumnos)
+            {
+                if (alumno == alu)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
         }
 
         public static bool operator !=(Universidad universidad, Alumno alumno)
@@ -82,7 +95,20 @@ namespace Clases_Instanciables
 
         public static bool operator ==(Universidad universidad, Profesor profesor)
         {
-            return !ReferenceEquals(universidad, null) && universidad.profesores.Contains(profesor);
+            if (ReferenceEquals(universidad,null))
+            {
+                return false;
+            }
+
+            foreach (Profesor profe in universidad.profesores)
+            {
+                if (profe == profesor)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static bool operator !=(Universidad universidad, Profesor profesor)
@@ -102,29 +128,34 @@ namespace Clases_Instanciables
                     alumnosQuePuedenTomarLaClase.Add(alumno);
                 }
             }
+
+            Jornada jornada = new Jornada(clases, profesorQuePuedeDarLaClase);
+            jornada.Alumnos = alumnosQuePuedenTomarLaClase;
             
-            universidad.jornada.Add(new Jornada(clases, profesorQuePuedeDarLaClase));
+            universidad.jornada.Add(jornada);
+            
             return universidad;
 
         }
 
         public static Universidad operator +(Universidad universidad, Alumno alumno)
         {
-            if (universidad.alumnos.Contains(alumno))
+
+            if (universidad == alumno)
             {
-                throw new AlumnoRepetidoException($"El alumno {alumno.MostrarDatos()} ya esta la universidad.");
+                throw new AlumnoRepetidoException("El alumno ya se encuentra en la lista");
             }
+            
             universidad.alumnos.Add(alumno);
             return universidad;
         }  
         
         public static Universidad operator +(Universidad universidad, Profesor profesor)
         {
-            if (universidad.profesores.Contains(profesor))
+            if (universidad != profesor)
             {
-                return universidad;
+                universidad.profesores.Add(profesor);
             }
-            universidad.profesores.Add(profesor);
             return universidad;
         }
 

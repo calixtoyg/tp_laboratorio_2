@@ -59,7 +59,20 @@ namespace TP_03
 
         public static bool operator ==(Profesor profesor, Universidad.EClases clases)
         {
-            return !ReferenceEquals(profesor,null) && profesor.claseDelDia.Contains(clases);
+            if (ReferenceEquals(profesor,null))
+            {
+                return false;
+            }
+            
+            foreach (Universidad.EClases clase in profesor.claseDelDia)
+            {
+                if (clase.Equals(clases))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static bool operator !=(Profesor profesor, Universidad.EClases clases)

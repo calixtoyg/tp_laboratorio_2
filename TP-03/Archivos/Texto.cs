@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using Clases_Instanciables;
 
 namespace Archivos
@@ -6,17 +8,27 @@ namespace Archivos
     {
         public bool Guardar(string archivo, Jornada datos)
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(archivo, true))
-            {
-                file.Write(datos.Leer());
-            }
-
+            FileStream stream = new FileStream(archivo, FileMode.Append);
+            byte[] info = new UTF8Encoding(true).GetBytes(archivo);
+            stream.Write(info, 0, info.Length);
+            stream.Close();
             return true;
         }
 
         public bool Leer(string archivo, out Jornada datos)
         {
-            throw new System.NotImplementedException();
+            FileStream stream = File.OpenRead(archivo);
+            byte[] b = new byte[1024];
+            UTF8Encoding temp = new UTF8Encoding(true);
+            StringBuilder read = new StringBuilder();
+            while (stream.Read(b,0,b.Length) > 0)
+            {
+                read.Append(temp.GetString(b));
+            }
+            stream.Close();
+
+            datos = null;
+            return true;
         }
     }
 }
