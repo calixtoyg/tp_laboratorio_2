@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clases Abstractas", "Clases Abstractas\Clases Abstractas.csproj", "{89DB6461-9EFE-4894-ABBD-898375BE5EEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archivos", "Archivos\Archivos.csproj", "{B3383895-3DDA-42CF-B91B-CE082D295562}"
@@ -9,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\Excepciones.csproj", "{B7168458-C021-4CBB-A793-74C3913A28A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programa", "Programa\Programa.csproj", "{A095D25E-5C70-497D-A493-3467B5D20D82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2615730D-E043-4FB9-8F50-40381E3990CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +41,15 @@ Global
 		{A095D25E-5C70-497D-A493-3467B5D20D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A095D25E-5C70-497D-A493-3467B5D20D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A095D25E-5C70-497D-A493-3467B5D20D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2615730D-E043-4FB9-8F50-40381E3990CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2615730D-E043-4FB9-8F50-40381E3990CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2615730D-E043-4FB9-8F50-40381E3990CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2615730D-E043-4FB9-8F50-40381E3990CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {187D0F2B-41F0-4DE8-AAC0-08237E91A9A4}
 	EndGlobalSection
 EndGlobal
