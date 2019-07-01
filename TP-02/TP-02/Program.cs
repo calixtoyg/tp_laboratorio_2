@@ -9,14 +9,14 @@ namespace TP_02_2018
 {
     class Program
     {
-        static void Main(string[] args)
+         static void Main(string[] args)
         {
             // Configuración de la pantalla
             Console.SetWindowPosition(0, 0);
             Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight - 2);
 
             // Nombre del alumno
-            Console.WriteLine("Calixto González");
+            Console.WriteLine("Calixto Gonzalez");
 
             Changuito changoDeCompras = new Changuito(6);
 
@@ -47,11 +47,15 @@ namespace TP_02_2018
 
             // Quito un item y muestro
             changoDeCompras -= c1;
+            changoDeCompras -= new Dulce(Producto.EMarca.Ilolay, "ASD913", ConsoleColor.Red);
 
             Console.WriteLine(changoDeCompras.ToString());
             Console.WriteLine("<-----------PRESIONE UNA TECLA PARA CONTINUAR----------->");
             Console.ReadKey();
             Console.Clear();
+
+            // Vuelvo a agregar c2
+            changoDeCompras += c2;
 
             // Muestro solo Dulces
             Console.WriteLine(Changuito.Mostrar(changoDeCompras, Changuito.ETipo.Dulce));
