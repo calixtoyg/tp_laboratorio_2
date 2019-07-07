@@ -15,7 +15,7 @@ namespace TP_04
         static PaqueteDAO()
         {
             conexion = new SqlConnection(
-                "Data Source=.\\SQLEXPRESS;Initial Catalog=patentes-sp-2018;Integrated Security=True");
+                "Data Source=.\\SQLEXPRESS;Initial Catalog=correo-sp-2017;Integrated Security=True");
             // CREO UN OBJETO SQLCOMMAND
             comando = new SqlCommand();
             // INDICO EL TIPO DE COMANDO

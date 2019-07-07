@@ -12,5 +12,9 @@ namespace CustomExceptions
         {
             
         }
+        public TrackingIdRepetidoException(string mensaje, Exception inner) : base(mensaje, inner)
+        {
+        }
+        
     }
 }

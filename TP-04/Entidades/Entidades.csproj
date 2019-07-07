@@ -41,6 +41,8 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Correo.cs" />
     <Compile Include="Formulario.cs" />
+    <Compile Include="GuardarString.cs" />
+    <Compile Include="IMostrar.cs" />
     <Compile Include="Paquete.cs" />
     <Compile Include="PaqueteDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

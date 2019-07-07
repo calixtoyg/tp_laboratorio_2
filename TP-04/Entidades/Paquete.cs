@@ -1,10 +1,12 @@
 using System;
+using System.Threading;
 
 namespace TP_04
 {
-    public class Paquete
+    public class Paquete : IMostrar<Paquete>
     {
-        public EventHandler<EventArgs> InformarEstado;
+        public delegate void DelegadoEstado(object sender, EventArgs e);
+        public event DelegadoEstado InformarEstado;
         
         private string direccionEntrega;
         private EEstado estado;
@@ -15,6 +17,52 @@ namespace TP_04
             DireccionEntrega = direccionEntrega;
             TrackingID = trackingID;
         }
+
+
+        public void MockCicloDeVida()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                this.estado += 1;
+                if (!ReferenceEquals(InformarEstado,null))
+                {
+                    this.InformarEstado(this, new EventArgs());
+                    
+                }
+                if (this.estado == EEstado.Entregado)
+                {
+                    PaqueteDAO.Insertar(this);
+                    return;
+                }
+            }
+
+        }
+
+        public string MostrarDatos(IMostrar<Paquete> lista)
+        {
+            Paquete paquete = (Paquete) lista;
+            return $"{paquete.trackingID} para direccion: {paquete.direccionEntrega}";
+
+        }
+
+        public static bool operator ==(Paquete p1, Paquete p2)
+        {
+            return p1.trackingID == p2.trackingID;
+        }
+
+        public static bool operator !=(Paquete p1, Paquete p2)
+        {
+            return !(p1 == p2);
+        }
+
+
+        public override string ToString()
+        {
+            return MostrarDatos(this);
+        }
+
+
 
         public string DireccionEntrega
         {
@@ -33,6 +81,9 @@ namespace TP_04
             get => trackingID;
             set => trackingID = value;
         }
+        
+        
+        
     }
 
     public enum EEstado

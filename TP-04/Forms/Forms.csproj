@@ -79,5 +79,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomExceptions\CustomExceptions.csproj">
+      <Project>{d51f25ab-78d6-4d6e-8887-2269b3a5af1f}</Project>
+      <Name>CustomExceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{3b372b91-76c4-490d-82b2-ea455fdb0882}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
