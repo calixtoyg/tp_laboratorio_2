@@ -29,7 +29,7 @@ namespace TP_04
             if (ReferenceEquals(paquete, null) || ReferenceEquals(paquete.DireccionEntrega, null) || ReferenceEquals(paquete.DireccionEntrega, String.Empty) ||
                 ReferenceEquals(paquete.Estado, null) || ReferenceEquals(paquete.TrackingID, null) || ReferenceEquals(paquete.TrackingID, String.Empty))
             {
-                throw new NullReferenceException("Error. Algun dato del paquete no fue completado.");
+                throw new DatoNoCompletadoException("Error. Algun dato del paquete no fue completado.");
             }
 
             Paquete paqueteRepeated = GetByTrackingId(paquete.TrackingID);
@@ -41,7 +41,7 @@ namespace TP_04
 
             string alumno = "Calixto Gonzalez";
             string sql =
-                $"INSERT INTO [correo-sp-2017].[dbo].[Paquetes] VALUES ({paquete.DireccionEntrega},{paquete.TrackingID},{alumno})";
+                $"INSERT INTO [correo-sp-2017].[dbo].[Paquetes] VALUES ('{paquete.DireccionEntrega}','{paquete.TrackingID}','{alumno}')";
 
             try
             {
@@ -63,7 +63,8 @@ namespace TP_04
             Paquete paqueteToReturn = null;
             try
             {
-                comando.CommandText = $"Select trackingID from [correo-sp-2017].[dbo].[Paquetes] where trackingID={paqueteTrackingId}";
+                conexion.Close();
+                comando.CommandText = $"Select direccionEntrega,trackingID from [correo-sp-2017].[dbo].[Paquetes] where trackingID='{paqueteTrackingId}'";
 
                 conexion.Open();
 
@@ -95,4 +96,5 @@ namespace TP_04
 
         }
     }
+    
 }

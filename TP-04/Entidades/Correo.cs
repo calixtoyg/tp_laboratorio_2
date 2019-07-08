@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -29,6 +30,7 @@ namespace TP_04
                         // si no queda nada en el enumerator hago un break.
                         break;
                     }
+
                     Thread current = enumerator.Current;
                     if (current.IsAlive)
                     {
@@ -50,15 +52,17 @@ namespace TP_04
                         // si no queda nada en el enumerator hago un break.
                         break;
                     }
+
                     Paquete current = enumerator.Current;
-                    mostrarDatosBuilder.AppendLine($"{current.TrackingID} para: {current.DireccionEntrega} en estado: ({current.Estado.ToString()})");
+                    mostrarDatosBuilder.AppendLine(
+                        $"{current.TrackingID} para: {current.DireccionEntrega} en estado: ({current.Estado.ToString()})");
                 }
             }
-            return mostrarDatosBuilder.ToString();
 
+            return mostrarDatosBuilder.ToString();
         }
-       
-        
+
+
         public static Correo operator +(Correo c, Paquete p)
         {
             using (List<Paquete>.Enumerator enumerator = c.paquetes.GetEnumerator())
@@ -70,6 +74,7 @@ namespace TP_04
                         // si no queda nada en el enumerator hago un break.
                         break;
                     }
+
                     Paquete current = enumerator.Current;
                     if (p == current)
                     {
@@ -77,21 +82,33 @@ namespace TP_04
                     }
                 }
             }
+
             c.paquetes.Add(p);
             Thread item = new Thread(new ThreadStart(p.MockCicloDeVida));
             item.Start();
+            try
+            {
+                p.MockCicloDeVida();
+            }
+            catch (TrackingIdRepetidoException e)
+            {
+                throw new TrackingIdRepetidoException($"Tracking ID {p.TrackingID} ya esta en la lista.", e);
+            }
+            catch (DatoNoCompletadoException e)
+            {
+                throw new DatoNoCompletadoException("Algun dato esta vacio.");
+            }
+
             c.mockPaquetes.Add(item);
             return c;
         }
 
 
-
-        
-        
-        
         // Properties
-        public List<Paquete> Paquetes { get; set; }
-        
-        
+        public List<Paquete> Paquetes
+        {
+            get { return paquetes; }
+            set { paquetes = value; }
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using CustomExceptions;
 
 namespace TP_04
 {
@@ -23,7 +24,7 @@ namespace TP_04
         {
             while (true)
             {
-                Thread.Sleep(1000);
+               // Thread.Sleep(1000);
                 this.estado += 1;
                 if (!ReferenceEquals(InformarEstado,null))
                 {
@@ -32,8 +33,20 @@ namespace TP_04
                 }
                 if (this.estado == EEstado.Entregado)
                 {
-                    PaqueteDAO.Insertar(this);
-                    return;
+                    try
+                    {
+                        PaqueteDAO.Insertar(this);
+                        return;
+                    }
+                    catch (TrackingIdRepetidoException e)
+                    {
+                        throw;
+                    }
+                    catch (DatoNoCompletadoException e)
+                    {
+                        throw;
+                    }
+                    
                 }
             }
 
