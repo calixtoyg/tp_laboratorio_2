@@ -188,7 +188,24 @@ namespace Clases_Instanciables
 
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Universidad: ");
+            foreach (Alumno alumno in this.Alumnos)
+            {
+                sb.Append(alumno.MostrarDatos());
+            }
+
+            foreach (Profesor profesor in profesores)
+            {
+                sb.Append(profesor.MostrarDatos());
+            }
+
+            foreach (Jornada jornada in jornada)
+            {
+                sb.Append(jornada.ToString());
+            }
+
+            return sb.ToString();
         }
         public enum EClases
         {
