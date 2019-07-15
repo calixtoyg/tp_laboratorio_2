@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CustomExceptions;
 using TP_04;
@@ -22,8 +16,10 @@ namespace Forms
             InitializeComponent();
             this.Text = "Correo UTN por Calixto Gonzalez 2C";
             this.correo = new Correo();
+            lstEstadoEntregado.ContextMenuStrip = contextMenuStrip;
+            lstEstadoIngresado.ContextMenuStrip = contextMenuStrip;
+            lstEstadoEnViaje.ContextMenuStrip = contextMenuStrip;
         }
-
         private void btnAgregar_Click(object sender, EventArgs args)
         {
             Paquete paquete = new Paquete(this.txtDireccion.Text, this.txtTrackingId.Text);
@@ -106,6 +102,21 @@ namespace Forms
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.correo.FinEntregas();
+        }
+
+        private void lstEstadoIngresado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            contextMenuStrip.Show();
+        }
+
+        private void lstEstadoEnViaje_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            contextMenuStrip.Show();
+        }
+
+        private void lstEstadoEntregado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            contextMenuStrip.Show();
         }
     }
 }
