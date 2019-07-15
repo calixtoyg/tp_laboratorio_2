@@ -16,6 +16,7 @@ namespace MiCalculadora
             txtNumero1.Text = String.Empty;
             txtNumero2.Text = String.Empty;
             lblResultado.Text = String.Empty;
+            cmbOperador.SelectedItem = cmbOperador.Items[0];
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

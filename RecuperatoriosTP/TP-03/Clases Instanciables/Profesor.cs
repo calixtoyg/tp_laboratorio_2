@@ -82,7 +82,12 @@ namespace TP_03
 
         public override string ToString()
         {
-            return $"Profesor Clase del dia: {claseDelDia} Random: {GetClasesToString()} \n";
+            StringBuilder clasesDelDiaBuilder = new StringBuilder();
+            foreach (Universidad.EClases clases in claseDelDia)
+            {
+                clasesDelDiaBuilder.Append(" ").Append(clases);
+            }
+            return $"Profesor Clase del dia: {clasesDelDiaBuilder} Random: {GetClasesToString()} \n";
         }
 
         public override string MostrarDatos()
