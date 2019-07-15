@@ -46,13 +46,13 @@ namespace TP_04
 
         public static Correo operator +(Correo c, Paquete p)
         {
-//            foreach (Paquete paquete in c.paquetes)
-//            {
-//                if (p == paquete)
-//                {
-//                    throw new TrackingIdRepetidoException($"El Tracking ID {p.TrackingID} ya figura en la lista de envios.");
-//                }
-//            }
+            foreach (Paquete paquete in c.paquetes)
+            {
+                if (p == paquete)
+                {
+                    throw new TrackingIdRepetidoException($"El Tracking ID {p.TrackingID} ya figura en la lista de envios.");
+                }
+            }
             c.paquetes.Add(p);
             Thread item = new Thread(new ThreadStart(p.MockCicloDeVida));
             item.Start();
