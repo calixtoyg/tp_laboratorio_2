@@ -9,7 +9,7 @@ namespace Entidades_2018
     /// <summary>
     /// La clase Producto no deberá permitir que se instancien elementos de este tipo.
     /// </summary>
-    public class Producto
+    public abstract class Producto
     {
         public enum EMarca
         {
@@ -29,7 +29,7 @@ namespace Entidades_2018
         /// <summary>
         /// ReadOnly: Retornará la cantidad de ruedas del vehículo
         /// </summary>
-        protected virtual short CantidadCalorias { get; }
+        protected abstract short CantidadCalorias { get; }
 
         /// <summary>
         /// Publica todos los datos del Producto.
