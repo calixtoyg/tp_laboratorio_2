@@ -50,38 +50,24 @@ namespace Forms
             this.lstEstadoIngresado.Items.Clear();
             this.lstEstadoEnViaje.Items.Clear();
             this.lstEstadoEntregado.Items.Clear();
-            using (List<Paquete>.Enumerator enumerator = this.correo.Paquetes.GetEnumerator())
+            foreach (Paquete paquete in this.correo.Paquetes)
             {
-                while (true)
+                switch (paquete.Estado)
                 {
-                    if (!enumerator.MoveNext())
-                    {
+                    case EEstado.Ingresado:
+                        this.lstEstadoIngresado.Items.Add(paquete);
                         break;
-                    }
 
-                    Paquete current = enumerator.Current;
-                    switch (current.Estado)
-                    {
-                        case EEstado.Ingresado:
-                        {
-                            this.lstEstadoIngresado.Items.Add(current);
-                            continue;
-                        }
+                    case EEstado.EnViaje:
+                        this.lstEstadoEnViaje.Items.Add(paquete);
+                        break;
 
-                        case EEstado.EnViaje:
-                        {
-                            this.lstEstadoEnViaje.Items.Add(current);
-                            continue;
-                        }
-
-                        case EEstado.Entregado:
-                        {
-                            this.lstEstadoEntregado.Items.Add(current);
-                            continue;
-                        }
-                    }
+                    case EEstado.Entregado:
+                        this.lstEstadoEntregado.Items.Add(paquete);
+                        break;
                 }
             }
+
         }
 
         private void btnMostrarTodo_Click(object sender, EventArgs e)
@@ -106,15 +92,14 @@ namespace Forms
 
         private void PaqueteInformarEstado(object sender, EventArgs eventArgs)
         {
-            if (!InvokeRequired)
+            if (InvokeRequired)
             {
-                ActualizarEstados();
+                Paquete.DelegadoEstado delegadoEstado = this.PaqueteInformarEstado;
+                Invoke(delegadoEstado, new object[] { sender, eventArgs });
             }
             else
             {
-                Paquete.DelegadoEstado method = PaqueteInformarEstado;
-                object[] args = new object[] {sender, eventArgs};
-                Invoke(method, args);
+                ActualizarEstados();
             }
         }
 

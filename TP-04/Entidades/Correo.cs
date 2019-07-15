@@ -21,86 +21,44 @@ namespace TP_04
 
         public void FinEntregas()
         {
-            using (List<Thread>.Enumerator enumerator = this.mockPaquetes.GetEnumerator())
+            foreach (Thread thread in this.mockPaquetes)
             {
-                while (true)
+                if (thread.IsAlive)
                 {
-                    if (!enumerator.MoveNext())
-                    {
-                        // si no queda nada en el enumerator hago un break.
-                        break;
-                    }
-
-                    Thread current = enumerator.Current;
-                    if (current.IsAlive)
-                    {
-                        current.Abort();
-                    }
+                    thread.Abort();
                 }
             }
+
         }
 
         public string MostrarDatos(IMostrar<List<Paquete>> elementos)
         {
-            StringBuilder mostrarDatosBuilder = new StringBuilder();
-            using (List<Paquete>.Enumerator enumerator = ((Correo) elementos).paquetes.GetEnumerator())
+            List<Paquete> paquetes = ((Correo) elementos).paquetes;
+            StringBuilder builder = new StringBuilder();
+            foreach (Paquete paquete in paquetes)
             {
-                while (true)
-                {
-                    if (!enumerator.MoveNext())
-                    {
-                        // si no queda nada en el enumerator hago un break.
-                        break;
-                    }
-
-                    Paquete current = enumerator.Current;
-                    mostrarDatosBuilder.AppendLine(
-                        $"{current.TrackingID} para: {current.DireccionEntrega} en estado: ({current.Estado.ToString()})");
-                }
+                builder.AppendLine($"{paquete.TrackingID} para {paquete.DireccionEntrega} ({paquete.Estado.ToString()})");
             }
+            return builder.ToString();
 
-            return mostrarDatosBuilder.ToString();
         }
 
 
         public static Correo operator +(Correo c, Paquete p)
         {
-            using (List<Paquete>.Enumerator enumerator = c.paquetes.GetEnumerator())
-            {
-                while (true)
-                {
-                    if (!enumerator.MoveNext())
-                    {
-                        // si no queda nada en el enumerator hago un break.
-                        break;
-                    }
-
-                    Paquete current = enumerator.Current;
-                    if (p == current)
-                    {
-                        throw new TrackingIdRepetidoException($"Tracking ID {p.TrackingID} ya esta en la lista.");
-                    }
-                }
-            }
-
+//            foreach (Paquete paquete in c.paquetes)
+//            {
+//                if (p == paquete)
+//                {
+//                    throw new TrackingIdRepetidoException($"El Tracking ID {p.TrackingID} ya figura en la lista de envios.");
+//                }
+//            }
             c.paquetes.Add(p);
             Thread item = new Thread(new ThreadStart(p.MockCicloDeVida));
             item.Start();
-            try
-            {
-                p.MockCicloDeVida();
-            }
-            catch (TrackingIdRepetidoException e)
-            {
-                throw new TrackingIdRepetidoException($"Tracking ID {p.TrackingID} ya esta en la lista.", e);
-            }
-            catch (DatoNoCompletadoException e)
-            {
-                throw new DatoNoCompletadoException("Algun dato esta vacio.");
-            }
-
             c.mockPaquetes.Add(item);
             return c;
+   
         }
 
 

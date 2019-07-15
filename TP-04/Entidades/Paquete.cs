@@ -7,8 +7,9 @@ namespace TP_04
     public class Paquete : IMostrar<Paquete>
     {
         public delegate void DelegadoEstado(object sender, EventArgs e);
+
         public event DelegadoEstado InformarEstado;
-        
+
         private string direccionEntrega;
         private EEstado estado;
         private string trackingID;
@@ -22,41 +23,23 @@ namespace TP_04
 
         public void MockCicloDeVida()
         {
-            while (true)
-            {
-               // Thread.Sleep(1000);
-                this.estado += 1;
-                if (!ReferenceEquals(InformarEstado,null))
+           
+                do
                 {
+                    Thread.Sleep(1000);
+                    this.estado += 1;
                     this.InformarEstado(this, new EventArgs());
-                    
-                }
-                if (this.estado == EEstado.Entregado)
-                {
-                    try
-                    {
-                        PaqueteDAO.Insertar(this);
-                        return;
-                    }
-                    catch (TrackingIdRepetidoException e)
-                    {
-                        throw;
-                    }
-                    catch (DatoNoCompletadoException e)
-                    {
-                        throw;
-                    }
-                    
-                }
-            }
+                } while (this.estado != EEstado.Entregado);
 
+                PaqueteDAO.Insertar(this);
+            
+         
         }
 
         public string MostrarDatos(IMostrar<Paquete> lista)
         {
             Paquete paquete = (Paquete) lista;
             return $"{paquete.trackingID} para direccion: {paquete.direccionEntrega}";
-
         }
 
         public static bool operator ==(Paquete p1, Paquete p2)
@@ -76,7 +59,6 @@ namespace TP_04
         }
 
 
-
         public string DireccionEntrega
         {
             get => direccionEntrega;
@@ -94,13 +76,12 @@ namespace TP_04
             get => trackingID;
             set => trackingID = value;
         }
-        
-        
-        
     }
 
     public enum EEstado
     {
-        Ingresado,EnViaje,Entregado
+        Ingresado,
+        EnViaje,
+        Entregado
     }
 }
