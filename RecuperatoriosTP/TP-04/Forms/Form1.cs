@@ -103,20 +103,5 @@ namespace Forms
         {
             this.correo.FinEntregas();
         }
-
-        private void lstEstadoIngresado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            contextMenuStrip.Show();
-        }
-
-        private void lstEstadoEnViaje_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            contextMenuStrip.Show();
-        }
-
-        private void lstEstadoEntregado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            contextMenuStrip.Show();
-        }
     }
 }
