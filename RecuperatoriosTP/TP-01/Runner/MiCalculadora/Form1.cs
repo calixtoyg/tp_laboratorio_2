@@ -21,7 +21,7 @@ namespace MiCalculadora
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            cmbOperador.Text = String.Empty;
+            cmbOperador.SelectedItem = cmbOperador.Items[0];
             txtNumero1.Text = String.Empty;
             txtNumero2.Text = String.Empty;
             lblResultado.Text = String.Empty;
@@ -29,6 +29,10 @@ namespace MiCalculadora
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
+            if (this.cmbOperador.SelectedItem != "-" || this.cmbOperador.SelectedItem != "*" || this.cmbOperador.SelectedItem != "/" )
+            {
+                this.cmbOperador.SelectedItem = "+";
+            }
             double valorDeRetorno = Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.SelectedItem.ToString());
             if (valorDeRetorno == Double.MinValue)
             {
