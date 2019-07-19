@@ -1,8 +1,6 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.CompilerServices;
-using System.Text;
 using CustomExceptions;
 
 namespace TP_04
@@ -19,7 +17,7 @@ namespace TP_04
             // CREO UN OBJETO SQLCOMMAND
             comando = new SqlCommand();
             // INDICO EL TIPO DE COMANDO
-            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandType = CommandType.Text;
             // ESTABLEZCO LA CONEXION
             comando.Connection = conexion;
         }
