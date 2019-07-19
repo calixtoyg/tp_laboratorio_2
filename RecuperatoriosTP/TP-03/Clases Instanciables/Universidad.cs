@@ -18,7 +18,7 @@ namespace Clases_Instanciables
         private List<Profesor> profesores;
 
         /// <summary>
-        /// Constructor publico
+        /// Constructor publico necesario para que sea serializable.
         /// </summary>
         public Universidad()
         {

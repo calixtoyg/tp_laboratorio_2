@@ -8,7 +8,7 @@ namespace Clases_Instanciables
     {
         private Universidad.EClases clasesQueToma;
         private EEstadoCuenta estadoCuenta;
-
+        
         private Alumno()
         {
         }
@@ -25,7 +25,10 @@ namespace Clases_Instanciables
             this.estadoCuenta = estadoCuenta;
         }
 
-
+        /// <summary>
+        /// Retorna un string indicando que clase toma.
+        /// </summary>
+        /// <returns></returns>
         protected override string ParticiparEnClase()
         {
             return string.Format("TOMA CLASES DE {0}", clasesQueToma);
@@ -38,12 +41,22 @@ namespace Clases_Instanciables
                 .ToString();
         }
 
+        /// <summary>
+        /// Muestra los datos de un Alumno.
+        /// </summary>
+        /// <returns></returns>
         public override string MostrarDatos()
         {
             StringBuilder mostrarDatos = new StringBuilder(base.MostrarDatos());
             return mostrarDatos.Append(ToString()).ToString();
         }
 
+        /// <summary>
+        /// Un Alumno es igual a una EClase si, y solo si, el Alumno toma esa clase.
+        /// </summary>
+        /// <param name="alumno"></param>
+        /// <param name="clases"></param>
+        /// <returns></returns>
         public static bool operator ==(Alumno alumno, Universidad.EClases clases)
         {
             return alumno.clasesQueToma.Equals(clases) && !alumno.estadoCuenta.Equals(EEstadoCuenta.Deudor);
@@ -53,15 +66,12 @@ namespace Clases_Instanciables
         {
             return !alumno.clasesQueToma.Equals(clases);
         }
-        
+
         public enum EEstadoCuenta
         {
-            [Description("Cuota al día")]
-            AlDia,
+            [Description("Cuota al día")] AlDia,
             Deudor,
             Becado
         }
     }
-
-  
 }
