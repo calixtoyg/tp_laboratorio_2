@@ -20,28 +20,38 @@ namespace TP_04
             TrackingID = trackingID;
         }
 
-
+        /// <summary>
+        /// Hace un mock del ciclo de vida de un paquete
+        /// </summary>
         public void MockCicloDeVida()
         {
-           
-                do
-                {
-                    Thread.Sleep(10000);
-                    this.estado += 1;
-                    this.InformarEstado(this, new EventArgs());
-                } while (this.estado != EEstado.Entregado);
+            do
+            {
+                Thread.Sleep(10000);
+                this.estado += 1;
+                this.InformarEstado(this, new EventArgs());
+            } while (this.estado != EEstado.Entregado);
 
-                PaqueteDAO.Insertar(this);
-            
-         
+            PaqueteDAO.Insertar(this);
         }
 
+        /// <summary>
+        /// Muestra los datos de la lista de paquetes.
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <returns></returns>
         public string MostrarDatos(IMostrar<Paquete> lista)
         {
             Paquete paquete = (Paquete) lista;
             return $"{paquete.trackingID} para direccion: {paquete.direccionEntrega}";
         }
 
+        /// <summary>
+        /// Verifica la igualdad de paquetes mediante el trackingID
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns></returns>
         public static bool operator ==(Paquete p1, Paquete p2)
         {
             return p1.trackingID == p2.trackingID;
@@ -78,6 +88,9 @@ namespace TP_04
         }
     }
 
+    /// <summary>
+    /// Enum con los estados del paquete
+    /// </summary>
     public enum EEstado
     {
         Ingresado,

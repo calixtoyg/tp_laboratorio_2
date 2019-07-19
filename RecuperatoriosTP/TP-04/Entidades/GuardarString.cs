@@ -6,6 +6,13 @@ namespace TP_04
 {
     public static class GuardarString
     {
+        
+        /// <summary>
+        /// Guarda String en un archivo
+        /// </summary>
+        /// <param name="texto"></param>
+        /// <param name="archivo">path del archivo</param>
+        /// <returns></returns>
         public static bool Guardar(this string texto, string archivo)
         {
             try

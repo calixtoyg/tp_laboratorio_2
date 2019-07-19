@@ -19,6 +19,9 @@ namespace TP_04
             this.mockPaquetes = new List<Thread>();
         }
 
+        /// <summary>
+        /// Finaliza los threads
+        /// </summary>
         public void FinEntregas()
         {
             foreach (Thread thread in this.mockPaquetes)
@@ -28,9 +31,13 @@ namespace TP_04
                     thread.Abort();
                 }
             }
-
         }
 
+        /// <summary>
+        /// Muestra los datos de la lista.
+        /// </summary>
+        /// <param name="elementos"></param>
+        /// <returns></returns>
         public string MostrarDatos(IMostrar<List<Paquete>> elementos)
         {
             List<Paquete> paquetes = ((Correo) elementos).paquetes;
@@ -39,11 +46,17 @@ namespace TP_04
             {
                 builder.AppendLine($"{paquete.TrackingID} para {paquete.DireccionEntrega} ({paquete.Estado.ToString()})");
             }
-            return builder.ToString();
 
+            return builder.ToString();
         }
 
-
+        /// <summary>
+        /// Suma un paquete a un correo verificando que este no este en la lista.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        /// <exception cref="TrackingIdRepetidoException"></exception>
         public static Correo operator +(Correo c, Paquete p)
         {
             foreach (Paquete paquete in c.paquetes)
@@ -53,12 +66,12 @@ namespace TP_04
                     throw new TrackingIdRepetidoException($"El Tracking ID {p.TrackingID} ya figura en la lista de envios.");
                 }
             }
+
             c.paquetes.Add(p);
             Thread item = new Thread(p.MockCicloDeVida);
             item.Start();
             c.mockPaquetes.Add(item);
             return c;
-   
         }
 
 

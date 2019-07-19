@@ -24,6 +24,12 @@ namespace TP_04
             comando.Connection = conexion;
         }
 
+        /// <summary>
+        /// Inserta un paquete en la base de datos
+        /// </summary>
+        /// <param name="paquete">paquete a insertar</param>
+        /// <exception cref="DatoNoCompletadoException">Si algun dato esta null</exception>
+        /// <exception cref="TrackingIdRepetidoException">Si el tracking id esta repetido</exception>
         public static void Insertar(Paquete paquete)
         {
             if (ReferenceEquals(paquete, null) || ReferenceEquals(paquete.DireccionEntrega, null) || ReferenceEquals(paquete.DireccionEntrega, String.Empty) ||
@@ -58,6 +64,12 @@ namespace TP_04
             
         }
 
+        
+        /// <summary>
+        /// Busca un paquete por el trackingID
+        /// </summary>
+        /// <param name="paqueteTrackingId">ID del paquete a buscar</param>
+        /// <returns></returns>
         private static Paquete GetByTrackingId(string paqueteTrackingId)
         {
             Paquete paqueteToReturn = null;
