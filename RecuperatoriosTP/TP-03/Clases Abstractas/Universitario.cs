@@ -19,7 +19,7 @@ namespace TP_03
         public virtual string MostrarDatos()
         {
             StringBuilder toString = new StringBuilder(base.ToString());
-            return toString.AppendLine($"Legajo: {legajo}").ToString();
+            return toString.AppendLine($"LEGAJO NÚMERO: {legajo}").ToString();
         }
 
         protected abstract string ParticiparEnClase();

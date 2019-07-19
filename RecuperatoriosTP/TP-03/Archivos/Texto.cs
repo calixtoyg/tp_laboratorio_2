@@ -1,21 +1,30 @@
+using System;
 using System.IO;
 using System.Text;
-using Clases_Instanciables;
 
 namespace Archivos
 {
-    public class Texto : IArchivo<Jornada>
+    public class Texto : IArchivo<string>
     {
-        public bool Guardar(string archivo, Jornada datos)
+        public bool Guardar(string archivo, string datos)
         {
-            FileStream stream = new FileStream(archivo, FileMode.Append);
-            byte[] info = new UTF8Encoding(true).GetBytes(archivo);
-            stream.Write(info, 0, info.Length);
-            stream.Close();
-            return true;
+            try
+            {
+                using (StreamWriter file = new StreamWriter(archivo, true))
+                {
+                    file.WriteLine(datos);
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
-        public bool Leer(string archivo, out Jornada datos)
+        public bool Leer(string archivo, out string datos)
         {
             FileStream stream = File.OpenRead(archivo);
             byte[] b = new byte[1024];
@@ -27,7 +36,7 @@ namespace Archivos
             }
             stream.Close();
 
-            datos = null;
+            datos = read.ToString();
             return true;
         }
     }

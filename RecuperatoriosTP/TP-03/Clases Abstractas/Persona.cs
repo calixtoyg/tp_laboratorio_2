@@ -137,7 +137,10 @@ namespace TP_03
         public override string ToString()
         {
             StringBuilder toString = new StringBuilder();
-            return toString.AppendFormat("Nombre: {0} Apellido: {1} DNI: {2} Nacionalidad: {3} \n", Nombre, Apellido, Dni, Nacionalidad).ToString();
+            toString.AppendLine($"NOMBRE COMPLETO: {this.Apellido}, {this.Nombre}");   
+            toString.AppendLine($"NACIONALIDAD: {this.Nacionalidad} \n");
+            return toString.ToString();
+
         }
         public enum ENacionalidad
         {

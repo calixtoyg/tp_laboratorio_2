@@ -28,33 +28,32 @@ namespace TP_03
 
         protected override string ParticiparEnClase()
         {
-            string clases = GetClasesToString();
-            return $"CLASES DEL DÍA {clases} \n";
+//            string clases = GetClasesToString();
+            return ToString();
         }
 
-        private string GetClasesToString()
-        {
-            StringBuilder builder = new StringBuilder();
-            if (!ReferenceEquals(claseDelDia, null))
-            {
-                
-                foreach (Universidad.EClases clase in claseDelDia)
-                {
-
-                    builder.Append($"{clase.ToString()}, ");
-                }
-                // Remueve el ultimo espacio y su coma.
-                return builder.Remove(builder.Length-2,2).ToString();
-            }
-            return String.Empty;
-        }
+//        private string GetClasesToString()
+//        {
+//            StringBuilder builder = new StringBuilder();
+//            if (!ReferenceEquals(claseDelDia, null))
+//            {
+//                
+//                foreach (Universidad.EClases clase in claseDelDia)
+//                {
+//
+//                    builder.Append($"{clase.ToString()}, ");
+//                }
+//                // Remueve el ultimo espacio y su coma.
+//                return builder.Remove(builder.Length-2,2).ToString();
+//            }
+//            return String.Empty;
+//        }
 
         void _randomClases()
         {    
-            Array valores = Enum.GetValues(typeof(Universidad.EClases));
             random = new Random();
-            claseDelDia.Enqueue((Universidad.EClases)valores.GetValue(random.Next(valores.Length)));
-            claseDelDia.Enqueue((Universidad.EClases)valores.GetValue(random.Next(valores.Length)));
+            claseDelDia.Enqueue((Universidad.EClases) random.Next(0,4));
+            claseDelDia.Enqueue((Universidad.EClases) random.Next(0,4));
         }
 
         public static bool operator ==(Profesor profesor, Universidad.EClases clases)
@@ -85,9 +84,9 @@ namespace TP_03
             StringBuilder clasesDelDiaBuilder = new StringBuilder();
             foreach (Universidad.EClases clases in claseDelDia)
             {
-                clasesDelDiaBuilder.Append(" ").Append(clases);
+                clasesDelDiaBuilder.AppendLine(clases.ToString());
             }
-            return $"Profesor Clase del dia: {clasesDelDiaBuilder} Random: {GetClasesToString()} \n";
+            return $"CLASES DEL DÍA:\n{clasesDelDiaBuilder}";
         }
 
         public override string MostrarDatos()

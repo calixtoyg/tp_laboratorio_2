@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using TP_03;
 
 namespace Clases_Instanciables
@@ -27,19 +28,19 @@ namespace Clases_Instanciables
 
         protected override string ParticiparEnClase()
         {
-            return string.Format("TOMA CLASES DE {0} \n", clasesQueToma);
+            return string.Format("TOMA CLASES DE {0}", clasesQueToma);
         }
 
         public override string ToString()
         {
-            return new StringBuilder().AppendFormat("ESTADO DE CUENTA: {0} TOMA CLASES DE: {1} \n", estadoCuenta, clasesQueToma)
+            return new StringBuilder().AppendFormat("ESTADO DE CUENTA: {0} \n", estadoCuenta)
+                .AppendLine(ParticiparEnClase())
                 .ToString();
         }
 
         public override string MostrarDatos()
         {
             StringBuilder mostrarDatos = new StringBuilder(base.MostrarDatos());
-            //Todo checkear
             return mostrarDatos.Append(ToString()).ToString();
         }
 
@@ -55,6 +56,7 @@ namespace Clases_Instanciables
         
         public enum EEstadoCuenta
         {
+            [Description("Cuota al día")]
             AlDia,
             Deudor,
             Becado

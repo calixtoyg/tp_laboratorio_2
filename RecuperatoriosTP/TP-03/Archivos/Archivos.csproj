@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Clases Instanciables\Clases Instanciables.csproj">
-      <Project>{a5a4f091-fae3-4fa4-874b-3a1ecf531279}</Project>
-      <Name>Clases Instanciables</Name>
+    <ProjectReference Include="..\Excepciones\Excepciones.csproj">
+      <Project>{b7168458-c021-4cbb-a793-74c3913a28a6}</Project>
+      <Name>Excepciones</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
