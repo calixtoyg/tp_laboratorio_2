@@ -26,7 +26,7 @@ namespace TP_04
            
                 do
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(10000);
                     this.estado += 1;
                     this.InformarEstado(this, new EventArgs());
                 } while (this.estado != EEstado.Entregado);

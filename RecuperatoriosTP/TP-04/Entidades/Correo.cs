@@ -54,7 +54,7 @@ namespace TP_04
                 }
             }
             c.paquetes.Add(p);
-            Thread item = new Thread(new ThreadStart(p.MockCicloDeVida));
+            Thread item = new Thread(p.MockCicloDeVida);
             item.Start();
             c.mockPaquetes.Add(item);
             return c;
