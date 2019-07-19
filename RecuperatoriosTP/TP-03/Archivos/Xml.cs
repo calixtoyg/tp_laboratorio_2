@@ -7,6 +7,14 @@ namespace Archivos
 {
     public class Xml<T> : IArchivo<T>
     {
+        
+        /// <summary>
+        /// Serializa en un archivo xml el objeto que recibe como parametro
+        /// </summary>
+        /// <param name="archivo">path</param>
+        /// <param name="datos"></param>
+        /// <returns></returns>
+        /// <exception cref="ArchivosException"></exception>
         public bool Guardar(string archivo, T datos)
         {
             try
@@ -26,6 +34,13 @@ namespace Archivos
             }
         }
 
+        /// <summary>
+        /// Lee desde un archivo xml los datos de un objeto que recibe por parametro
+        /// </summary>
+        /// <param name="archivo">path</param>
+        /// <param name="datos"></param>
+        /// <returns></returns>
+        /// <exception cref="ArchivosException"></exception>
         public bool Leer(string archivo, out T datos)
         {
             try
